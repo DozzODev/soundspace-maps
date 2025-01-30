@@ -1,0 +1,70 @@
+-- Auto Parry Script with GUI
+
+-- Define the player and character
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Configuration
+local parryRange = 10 -- Range within which the parry will trigger
+local parryCooldown = 1 -- Cooldown time between parries
+local autoParryEnabled = false -- Auto Parry state
+
+-- Function to perform the parry
+local function performParry()
+    -- Add your parry logic here
+    -- This could be a function call or setting a value to trigger the parry
+    print("Parry performed!")
+end
+
+-- Function to detect incoming attacks and perform the parry
+local function autoParry()
+    while true do
+        if autoParryEnabled then
+            -- Get the position of the character
+            local charPosition = character.PrimaryPart.Position
+
+            -- Loop through all nearby objects to detect attacks
+            for _, obj in pairs(workspace:GetDescendants()) do
+                if obj:IsA("Part") and (obj.Position - charPosition).magnitude <= parryRange then
+                    -- Check if the object is an incoming attack
+                    if obj.Name == "Ball" then -- Adjust the name as needed
+                        performParry()
+                        wait(parryCooldown)
+                    end
+                end
+            end
+        end
+        wait(0.1)
+    end
+end
+
+-- Start the auto parry function in a separate thread
+spawn(autoParry)
+
+-- Create the GUI
+local screenGui = Instance.new("ScreenGui")
+local toggleButton = Instance.new("TextButton")
+
+screenGui.Parent = player:WaitForChild("PlayerGui")
+screenGui.Name = "AutoParryGUI"
+
+toggleButton.Parent = screenGui
+toggleButton.Name = "ToggleButton"
+toggleButton.Position = UDim2.new(0.5, -50, 0.9, -25)
+toggleButton.Size = UDim2.new(0, 100, 0, 50)
+toggleButton.BackgroundColor3 = Color3.new(0, 0, 0) -- Black background
+toggleButton.TextColor3 = Color3.new(1, 1, 1) -- White text
+toggleButton.Text = "Auto Parry: OFF"
+
+-- Function to toggle the auto parry state
+local function toggleAutoParry()
+    autoParryEnabled = not autoParryEnabled
+    if autoParryEnabled then
+        toggleButton.Text = "Auto Parry: ON"
+    else
+        toggleButton.Text = "Auto Parry: OFF"
+    end
+end
+
+-- Connect the button click to the toggle function
+toggleButton.MouseButton1Click:Connect(toggleAutoParry)
