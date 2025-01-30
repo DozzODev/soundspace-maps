@@ -1,0 +1,210 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local DropShadow = Instance.new("ImageLabel")
+local Title = Instance.new("TextLabel")
+local Subtitle = Instance.new("TextLabel")
+local Log = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+local OldButton = Instance.new("TextButton")
+local OldButtonCorner = Instance.new("UICorner")
+local OldButtonStroke = Instance.new("UIStroke")
+local NewButton = Instance.new("TextButton")
+local NewButtonCorner = Instance.new("UICorner")
+local NewButtonStroke = Instance.new("UIStroke")
+local HiddenFrame = Instance.new("Frame")
+local HiddenFrameCorner = Instance.new("UICorner")
+local LoadingText = Instance.new("TextLabel")
+
+ScreenGui.Parent = game:FindFirstChild('CoreGui') or game.Players.LocalPlayer.PlayerGui
+ScreenGui.ResetOnSpawn = false
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+ScreenGui.IgnoreGuiInset = true
+
+Frame.Parent = ScreenGui
+Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Frame.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.ClipsDescendants = true
+Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+Frame.Size = UDim2.new(0, 0, 0, 0)
+Frame.ZIndex = 2
+
+-- Tween to animate the frame size
+game:GetService('TweenService'):Create(Frame, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0.1, 200, 0.1, 125)}):Play()
+
+UICorner.CornerRadius = UDim.new(0, 3)
+UICorner.Parent = Frame
+
+DropShadow.Name = "DropShadow"
+DropShadow.Parent = Frame
+DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+DropShadow.BackgroundTransparency = 1.0
+DropShadow.BorderSizePixel = 0
+DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+DropShadow.Size = UDim2.new(1, 47, 1, 47)
+DropShadow.ZIndex = -2
+DropShadow.Image = "rbxassetid://6014261993"
+DropShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+DropShadow.ImageTransparency = 0.5
+DropShadow.ScaleType = Enum.ScaleType.Slice
+DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+
+Title.Name = "Title"
+Title.Parent = Frame
+Title.AnchorPoint = Vector2.new(0.5, 0)
+Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1.0
+Title.BorderSizePixel = 0
+Title.Position = UDim2.new(0.5, 0, 0.05, 0)
+Title.Size = UDim2.new(0.9, 0, 0.2, 0)
+Title.ZIndex = 4
+Title.Font = Enum.Font.GothamBold
+Title.Text = "BLADE BALL"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextScaled = true
+Title.TextWrapped = true
+
+Subtitle.Name = "Subtitle"
+Subtitle.Parent = Frame
+Subtitle.AnchorPoint = Vector2.new(0.5, 0)
+Subtitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Subtitle.BackgroundTransparency = 1.0
+Subtitle.BorderSizePixel = 0
+Subtitle.Position = UDim2.new(0.5, 0, 0.25, 0)
+Subtitle.Size = UDim2.new(0.9, 0, 0.12, 0)
+Subtitle.ZIndex = 4
+Subtitle.Font = Enum.Font.RobotoMono
+Subtitle.Text = "</>"
+Subtitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+Subtitle.TextScaled = true
+Subtitle.TextTransparency = 0.3
+Subtitle.TextWrapped = true
+
+Log.Name = "Log"
+Log.Parent = Frame
+Log.AnchorPoint = Vector2.new(0.5, 0)
+Log.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Log.BackgroundTransparency = 1.0
+Log.BorderSizePixel = 0
+Log.Position = UDim2.new(0.5, 0, 0.45, 0)
+Log.Size = UDim2.new(0.9, 0, 0.5, 0)
+Log.ZIndex = 4
+
+UIListLayout.Parent = Log
+UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+UIListLayout.Padding = UDim.new(0, 10)
+
+OldButton.Name = "OldButton"
+OldButton.Parent = Log
+OldButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+OldButton.BackgroundTransparency = 0.95
+OldButton.BorderSizePixel = 0
+OldButton.Size = UDim2.new(0.44, 0, 0.42, 0)
+OldButton.ZIndex = 5
+OldButton.Font = Enum.Font.GothamBold
+OldButton.Text = "OLD VERSION"
+OldButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+OldButton.TextScaled = true
+OldButton.TextWrapped = true
+
+OldButtonCorner.CornerRadius = UDim.new(0, 3)
+OldButtonCorner.Parent = OldButton
+
+OldButtonStroke.Color = Color3.fromRGB(40, 40, 40)
+OldButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+OldButtonStroke.Parent = OldButton
+
+NewButton.Name = "NewButton"
+NewButton.Parent = Log
+NewButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+NewButton.BackgroundTransparency = 0.95
+NewButton.BorderSizePixel = 0
+NewButton.Size = UDim2.new(0.44, 0, 0.42, 0)
+NewButton.ZIndex = 5
+NewButton.Font = Enum.Font.GothamBold
+NewButton.Text = "NEW VERSION"
+NewButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+NewButton.TextScaled = true
+NewButton.TextWrapped = true
+
+NewButtonCorner.CornerRadius = UDim.new(0, 3)
+NewButtonCorner.Parent = NewButton
+
+NewButtonStroke.Color = Color3.fromRGB(40, 40, 40)
+NewButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+NewButtonStroke.Parent = NewButton
+
+HiddenFrame.Name = "HiddenFrame"
+HiddenFrame.Parent = Frame
+HiddenFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+HiddenFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+HiddenFrame.BorderSizePixel = 0
+HiddenFrame.Position = UDim2.new(0.5, 0, 1.5, 0)
+HiddenFrame.Size = UDim2.new(1, 0, 1, 0)
+HiddenFrame.ZIndex = 10
+
+HiddenFrameCorner.CornerRadius = UDim.new(0, 3)
+HiddenFrameCorner.Parent = HiddenFrame
+
+LoadingText.Name = "LoadingText"
+LoadingText.Parent = HiddenFrame
+LoadingText.AnchorPoint = Vector2.new(0.5, 0.5)
+LoadingText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+LoadingText.BackgroundTransparency = 1.0
+LoadingText.BorderSizePixel = 0
+LoadingText.Position = UDim2.new(0.5, 0, 0.5, 0)
+LoadingText.Size = UDim2.new(0.9, 0, 0.2, 0)
+LoadingText.ZIndex = 11
+LoadingText.Font = Enum.Font.RobotoMono
+LoadingText.Text = "Loading..."
+LoadingText.TextColor3 = Color3.fromRGB(255, 255, 255)
+LoadingText.TextScaled = true
+LoadingText.TextWrapped = true
+
+-- Adding hover effect for buttons
+for _, v in ipairs(Log:GetChildren()) do
+    if v:IsA('TextButton') then
+        v.MouseEnter:Connect(function()
+            game:GetService('TweenService'):Create(v, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {Size = UDim2.new(0.47, 0, 0.45, 0)}):Play()
+            game.TweenService:Create(v:FindFirstChild('UIStroke'), TweenInfo.new(0.1), {Color = Color3.fromRGB(112, 112, 112)}):Play()
+        end)
+
+        v.MouseLeave:Connect(function()
+            game.TweenService:Create(v:FindFirstChild('UIStroke'), TweenInfo.new(0.1), {Color = Color3.fromRGB(40, 40, 40)}):Play()
+            game:GetService('TweenService'):Create(v, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {Size = UDim2.new(0.44, 0, 0.42, 0)}):Play()
+        end)
+    end	
+end
+
+-- Animation function for starting effect
+local function startEffect()
+    game:GetService('TweenService'):Create(Frame, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0.1, 190, 0.1, 115)}):Play()
+    game:GetService('TweenService'):Create(HiddenFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Position = UDim2.new(0.5, 0, 0.5, 0)}):Play()
+
+    task.spawn(function()
+        task.wait(1)
+        local tween = game:GetService('TweenService'):Create(Frame, TweenInfo.new(1, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {Size = UDim2.new(0, 0, 0, 0)})
+        tween:Play()
+        tween.Completed:Wait()
+        ScreenGui:Destroy()
+    end)
+end
+
+NewButton.MouseButton1Click:Connect(function()
+    startEffect()
+    pcall(function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/3345-c-a-t-s-u-s/New-C4-Remote.lua/main/Loader.json'))()
+    end)
+end)
+
+OldButton.MouseButton1Click:Connect(function()
+    startEffect()
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/New-C4-Remote.lua/main/BetaTest/Bladeball15m.html"))()
+    end)
+end)
